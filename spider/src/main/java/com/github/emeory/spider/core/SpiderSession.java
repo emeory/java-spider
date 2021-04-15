@@ -5,6 +5,7 @@ import com.github.emeory.spider.http.HttpRequest;
 import com.github.emeory.spider.http.HttpResponse;
 import com.github.emeory.spider.component.ControllerWrapper;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -66,6 +67,12 @@ public abstract class SpiderSession implements Session{
    * @return 生成的会话, 用户可以进行操作
    */
   public abstract SpiderSession addRequest(String url);
+
+  public void addRequest(List<String> urls) {
+    for (String url : urls) {
+      addRequest(url);
+    }
+  }
 
   /**
    * 添加一个新的 HTTP GET 请求到任务队列中
