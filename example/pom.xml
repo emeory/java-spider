@@ -17,4 +17,11 @@
     <maven.compiler.target>8</maven.compiler.target>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.github.emeory</groupId>
+      <artifactId>spider</artifactId>
+      <version>${spider.version}</version>
+    </dependency>
+  </dependencies>
 </project>

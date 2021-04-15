@@ -23,3 +23,29 @@
 - `Downloader`组件
 这个组件就是直接通过HTTP访问网站抓取数据，目前框架默认实现的是基于 `OkHttp3` 封装的下载器。
   
+### 3.使用示例
+在 `example` 包下面实现了一个完成的爬虫示例：爬取腾讯新闻的首页的新闻列表以及新闻详情
+```java
+public class Spider {
+
+  public static void main(String[] args) {
+    String url = "https://i.news.qq.com/trpc.qqnews_web.kv_srv.kv_srv_http_proxy/list?sub_srv_id=24hours&srv_id=pc&offset=0&limit=20&strategy=1&ext={%22pool%22:[%22top%22],%22is_filter%22:7,%22check_type%22:true}";
+    SpiderApplication spiderApplication = new SpiderApplication();
+
+    //添加爬取新闻首页列表的Controller
+    Controller indexController = new IndexController();
+    spiderApplication.addController(indexController);
+
+    //添加爬取新闻内容的Controller
+    Controller newsController = new NewsController();
+    spiderApplication.addController(newsController);
+
+    //设置持久层: 这里只是把爬取的数据显示出来
+    Repository repository = new DisplayRepository();
+    spiderApplication.setRepository(repository);
+
+    //开始爬取数据
+    spiderApplication.request(url);
+  }
+}
+```
